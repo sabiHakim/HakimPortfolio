@@ -1,65 +1,3 @@
-// // src/app/components/Projects.tsx
-// "use client";
-// import ProjectCard from "./ProjectCard";
-
-// export default function Projects() {
-//   // Placeholder projets (tu les changes après)
-//   const projects = [
-//     {
-//       id: 1,
-//       title: "Times261",
-//       tech: "Laravel + Php +React",
-//       image:
-//         "https://images.unsplash.com/photo-1620121692029-d088224ddc74?w=1200&h=800&fit=crop",
-//     },
-//     {
-//       id: 2,
-//       title: "Rental",
-//       tech: "NextJS + SpringBoot + Java",
-//       image:
-//         "/ordi.jfif",
-//     },
-//     {
-//       id: 3,
-//       title: "C.A.R",
-//       tech: "Next.js",
-//       image:
-//         "/ordi.jfif",
-//     },
-//     {
-//       id: 4,
-//       title: "ERP C.A.R",
-//       tech: "React + SpringBoot + Java",
-//       image:
-//         "https://images.unsplash.com/photo-1620121692029-d088224ddc74?w=1200&h=800&fit=crop",
-//     },
-//     {
-//       id: 5,
-//       title: "Pointage",
-//       tech: "Laravel + Php",
-//       image:
-//         "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=800&fit=crop",
-//     },
-//   ];
-
-//   return (
-//     <section id="projets" className="py-32 px-8">
-//       <div className="max-w-7xl mx-auto">
-//         <h2 className="text-7xl md:text-9xl font-bold tracking-tighter mb-20 overflow-hidden">
-//           Projets
-//         </h2>
-
-//         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
-//           {projects.map((project) => (
-//             <ProjectCard key={project.id} project={project} />
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-// src/app/components/Projects.tsx
-// src/app/components/Projects.tsx
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -77,104 +15,93 @@ interface ProjectType {
   image: string;
   liveUrl?: string;
 }
+
+const projects: ProjectType[] = [
+  {
+    id: 1,
+    title: "Times261",
+    tech: "Laravel · PHP · React",
+    image: "/ordi.jfif",
+    liveUrl: "https://times261.com",
+  },
+  {
+    id: 2,
+    title: "Rental System",
+    tech: "Next.js · SpringBoot · Java",
+    image: "/ordi.jfif",
+    liveUrl: "https://rental.mg-transp.com",
+  },
+  {
+    id: 3,
+    title: "C.A.R Platform",
+    tech: "Next.js · TypeScript · Tailwind",
+    image: "/ordi.jfif",
+    liveUrl: "https://cartaxaudit.com",
+  },
+  {
+    id: 4,
+    title: "ERP C.A.R",
+    tech: "React · SpringBoot · Java",
+    image: "/ordi.jfif",
+    liveUrl: "https://erp.cartaxaudit.com",
+  },
+  { id: 5, title: "Pointage RH", tech: "Laravel · PHP", image: "/ordi.jfif" },
+];
+
 export default function Projects() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  const projects: ProjectType[] = [
-    {
-      id: 1,
-      title: "Times261",
-      tech: "Laravel · PHP · React",
-      image: "/ordi.jfif",
-      liveUrl: "https://times261.com",
-    },
-    {
-      id: 2,
-      title: "Rental System",
-      tech: "Next.js · SpringBoot · Java",
-      image: "/ordi.jfif",
-      liveUrl: "https://rental.mg-transp.com",
-    },
-    {
-      id: 3,
-      title: "C.A.R Platform",
-      tech: "Next.js · TypeScript · Tailwind",
-      image: "/ordi.jfif",
-      liveUrl: "https://cartaxaudit.com",
-    },
-    {
-      id: 4,
-      title: "ERP C.A.R",
-      tech: "React · SpringBoot · Java",
-      image: "/ordi.jfif",
-      liveUrl: "https://erp.cartaxaudit.com",
-    },
-    { id: 5, title: "Pointage RH", tech: "Laravel · PHP", image: "/ordi.jfif" },
-  ];
-
   useEffect(() => {
-    // Nettoyage + redimensionnement du tableau de refs à chaque render
-    cardsRef.current = cardsRef.current.slice(0, projects.length);
-
     const ctx = gsap.context(() => {
-      cardsRef.current.forEach((card, i) => {
-        if (!card) return;
+      const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
 
-        gsap.set(card, {
-          opacity: 0,
-          y: 180,
-          rotationX: -50,
-          scale: 0.82,
-          filter: "blur(12px)",
-          transformOrigin: "center bottom",
-        });
+      gsap.set(cards, {
+        opacity: 0,
+        y: 60,
+        scale: 0.97,
+        filter: "blur(6px)",
+        transformOrigin: "center center",
+      });
 
-        gsap.to(card, {
-          opacity: 1,
-          y: 0,
-          rotationX: 0,
-          scale: 1,
-          filter: "blur(0px)",
-          duration: 0.65,
-          ease: "power4.out",
-          delay: i * 0.06,
-          scrollTrigger: {
-            trigger: card,
-            start: "top 90%",
-            toggleActions: "play none none reverse",
-          },
-        });
+      gsap.to(cards, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        filter: "blur(0px)",
+        duration: 0.9,
+        ease: "power3.out",
+        stagger: 0.12,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 72%",
+          toggleActions: "play none none reverse",
+        },
       });
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [projects.length]); // ← dépendance propre
+  }, []);
 
   return (
     <section
       ref={sectionRef}
       id="projets"
-      className="py-32 px-8 bg-black text-white"
+      className="bg-black px-6 py-20 text-white md:px-8 md:py-28"
     >
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-7xl md:text-9xl lg:text-[11rem] font-black tracking-tighter text-center mb-32 overflow-hidden">
-          <span className="inline-block" style={{ perspective: 1600 }}>
-            Projets
-          </span>
+      <div className="mx-auto max-w-7xl">
+        <h2 className="font-display mb-16 text-center text-4xl font-normal tracking-[0.08em] sm:text-5xl md:mb-24 md:text-6xl lg:text-7xl">
+          Projets
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10 lg:gap-14">
           {projects.map((project, i) => (
             <div
               key={project.id}
-              // ← CORRIGÉ : plus d'erreur TypeScript
               ref={(el) => {
                 cardsRef.current[i] = el;
               }}
-              className="group relative rounded-3xl overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 
-                         transition-all duration-700 hover:bg-white/10 hover:border-white/30 
-                         hover:shadow-2xl hover:shadow-purple-500/20"
+              className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:border-white/20 hover:bg-white/10 hover:shadow-2xl hover:shadow-purple-500/15"
             >
               {project.liveUrl ? (
                 <a
@@ -212,37 +139,36 @@ function ProjectCard({
           src={project.image}
           alt={project.title}
           fill
-          className="object-cover transition-transform duration-2000 ease-out group-hover:scale-110"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 50vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
 
-        {hasLink && (
-          <div className="absolute top-6 right-6 flex items-center gap-2 bg-purple-600/90 backdrop-blur px-4 py-2 rounded-full text-xs font-bold tracking-wider">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
+        {hasLink ? (
+          <div className="absolute right-4 top-4 rounded-full bg-purple-600/90 px-3 py-2 text-[10px] font-bold tracking-[0.25em] backdrop-blur md:right-6 md:top-6 md:px-4">
+            <span className="relative mr-2 inline-flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
             </span>
             LIVE
           </div>
-        )}
-        {!hasLink && (
-          <div className="absolute top-6 right-6 bg-white/10 backdrop-blur px-5 py-2 rounded-full text-xs font-medium">
-            Bientôt
+        ) : (
+          <div className="absolute right-4 top-4 rounded-full bg-white/10 px-3 py-2 text-[10px] font-medium backdrop-blur md:right-6 md:top-6 md:px-5">
+            
           </div>
         )}
       </div>
 
-      <div className="p-10 md:p-14 space-y-6">
-        <div className="flex items-start justify-between">
-          <h3 className="text-4xl md:text-5xl font-black tracking-tight group-hover:text-purple-100 transition-colors duration-700">
+      <div className="space-y-3 p-6 md:p-8 lg:p-10">
+        <div className="flex items-start justify-between gap-4">
+          <h3 className="text-2xl font-semibold tracking-tight transition-colors duration-500 group-hover:text-purple-100 sm:text-3xl md:text-4xl">
             {project.title}
           </h3>
           {hasLink && (
-            <ExternalLink className="w-8 h-8 text-purple-400 opacity-0 translate-y-6 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700" />
+            <ExternalLink className="h-5 w-5 shrink-0 text-purple-400 opacity-0 translate-y-3 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:h-6 sm:w-6" />
           )}
         </div>
-        <p className="text-xl md:text-2xl text-gray-400 font-medium">
+        <p className="text-sm font-medium text-gray-400 sm:text-base md:text-lg">
           {project.tech}
         </p>
       </div>

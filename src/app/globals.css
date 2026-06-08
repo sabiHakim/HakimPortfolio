@@ -29,6 +29,11 @@ body {
 
 @import "tailwindcss";
 
+@theme inline {
+  --font-sans: var(--font-space-grotesk);
+  --font-display: var(--font-bebas-neue);
+}
+
 /* Tu peux remettre tes styles custom après l'import */
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
@@ -45,6 +50,17 @@ body {
 ::selection {
   background: #fff;
   color: #000;
+}
+
+body {
+  font-family: var(--font-sans), sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display {
+  font-family: var(--font-display), sans-serif;
 }
 
 /* Optionnel : si tu veux garder des @layer comme avant */

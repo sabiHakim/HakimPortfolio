@@ -1,77 +1,4 @@
-// "use client";
 
-// import { useEffect, useRef } from "react";
-// import { gsap } from "gsap";
-// import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-// gsap.registerPlugin(ScrollTrigger);
-
-// export default function About() {
-//   const containerRef = useRef(null);
-//   const titleRef = useRef(null);
-//   const textRef = useRef(null);
-
-//   useEffect(() => {
-//     const ctx = gsap.context(() => {
-//       gsap.fromTo(
-//         titleRef.current,
-//         { y: 100, opacity: 0 },
-//         {
-//           y: 0,
-//           opacity: 1,
-//           duration: 1.2,
-//           ease: "power3.out",
-//           scrollTrigger: {
-//             trigger: containerRef.current,
-//             start: "top 80%",
-//           },
-//         }
-//       );
-
-//       gsap.fromTo(
-//         textRef.current,
-//         { y: 80, opacity: 0 },
-//         {
-//           y: 0,
-//           opacity: 1,
-//           duration: 1,
-//           delay: 0.3,
-//           ease: "power3.out",
-//           scrollTrigger: {
-//             trigger: containerRef.current,
-//             start: "top 80%",
-//           },
-//         }
-//       );
-//     }, containerRef);
-
-//     return () => ctx.revert();
-//   }, []);
-
-//   return (
-//     <section id="apropos" ref={containerRef} className="min-h-screen flex items-center px-8 py-32">
-//       <div className="max-w-5xl mx-auto">
-//         <h2
-//           ref={titleRef}
-//           className="text-7xl md:text-9xl font-bold tracking-tighter mb-16 overflow-hidden"
-//         >
-//           À propos
-//         </h2>
-//         <div ref={textRef} className="space-y-6 text-xl md:text-2xl text-gray-300 leading-relaxed">
-//           <p>
-//             Je suis un <span className="text-white font-semibold">développeur créatif</span> et designer basé en France.
-//           </p>
-//           <p>
-//             J’aime transformer des idées en expériences digitales uniques, fluides et mémorables.
-//           </p>
-//           <p>
-//             Spécialisé en <span className="text-white font-semibold">Next.js, GSAP, Three.js</span> et tout ce qui rend le web beau et rapide.
-//           </p>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -213,7 +140,7 @@ export default function About() {
 
         <h2
           ref={titleRef}
-          className="text-8xl md:text-9xl lg:text-[11rem] font-black tracking-tighter leading-none mb-16 select-none"
+          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-[0.08em] leading-none mb-12 md:mb-16 select-none"
           style={{ perspective: 1200 }}
         >
           À propos
@@ -221,7 +148,7 @@ export default function About() {
 
         <div
           ref={textRef}
-          className="space-y-8 text-xl md:text-2xl lg:text-3xl text-gray-300 leading-relaxed max-w-4xl"
+          className="space-y-6 text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed max-w-4xl"
         >
           <p>
             Je suis{" "}
@@ -237,9 +164,9 @@ export default function About() {
             Passionné par le code propre, les performances extrêmes et les
             interfaces qui marquent les esprits.
           </p>
-          <p className="mt-16 text-4xl font-bold text-white/80">
-            Mes stacks techniques :
-          </p>
+            <p className="mt-10 text-xl sm:text-2xl md:text-3xl font-bold text-white/80">
+              Mes stacks techniques :
+            </p>
         </div>
 
         {/* MARQUEE INFINI AVEC LOGOS BLANC/NOIR + GLOW VIOLET AU HOVER */}

@@ -40,7 +40,7 @@ export default function Header() {
       <header className="fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-6 md:py-8 bg-black/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex flex-col leading-tight">
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold tracking-tighter text-white">
+            <h1 className="font-display text-xl md:text-2xl lg:text-3xl font-normal tracking-[0.12em] text-white">
               RAKOTOALIMANANA
             </h1>
             <p className="text-sm md:text-base lg:text-lg text-gray-300 -mt-1">
