@@ -1,261 +1,177 @@
-// // components/Projects.tsx ou app/projets/page.tsx
-// import Image from "next/image";
-// import Link from "next/link";
-// import { ExternalLink } from "lucide-react";
+"use client";
 
-// const projects = [
-//   {
-//     title: "Times261",
-//     tech: "Laravel · PHP · React",
-//     descri: "Gestion d'un site de journal  de Madagascar",
-//     image: "/ordi.jfif",
-//     liveUrl: "https://times261.com",
-//   },
-//   {
-//     title: "Rental System",
-//     tech: "Next.js · SpringBoot · Java",
-//     descri: "Platforme pour la gestion de réservation et location de voiture",
-//     image: "/ordi.jfif",
-//     liveUrl: "https://rental.mg-transp.com",
-//   },
-//   {
-//     title: "C.A.R Platform",
-//     tech: "Next.js · TypeScript · Tailwind",
-//     descri: "Développement du site web de l'entreprise",
-//     image: "/ordi.jfif",
-//     liveUrl: "https://cartaxaudit.com",
-//   },
-//   {
-//     title: "ERP C.A.R",
-//     tech: "React · SpringBoot · Java",
-//     descri: "Plateforme pour la gestion d'entreprise",
-//     image: "/ordi.jfif",
-//     liveUrl: "https://erp.cartaxaudit.com",
-//   },
-//   {
-//     title: "Pointage RH",
-//     tech: "Laravel · PHP",
-//     descri: "Gestion de pointage d'employer par empreinte digitale",
-//     image: "/ordi.jfif",
-//     soon: true,
-//   },
-// ];
-
-// export default function Projects() {
-//   return (
-//     <section className="min-h-screen bg-black py-32 px-6 md:px-12">
-//       <div className="max-w-7xl mx-auto">
-//         <h2 className="text-8xl md:text-9xl lg:text-[12rem] font-black tracking-tighter text-center mb-32 text-white/90">
-//           Projets
-//         </h2>
-
-//         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
-//           {projects.map((project, i) => (
-//             <div
-//               key={i}
-//               className="group relative h-[560px] rounded-3xl overflow-hidden bg-white/5 backdrop-blur border border-white/10 
-//                          transition-all duration-700 hover:border-white/30 hover:shadow-2xl hover:shadow-purple-500/30"
-//             >
-//               {/* Image avec zoom */}
-//               <Image
-//                 src={project.image}
-//                 alt={project.title}
-//                 fill
-//                 className="object-cover transition-transform duration-1200 ease-out group-hover:scale-110"
-//                 sizes="(max-width: 768px) 100vw, 50vw"
-//               />
-
-//               {/* Overlay sombre au hover */}
-//               <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-
-//               {/* Titre + Badge (toujours visible en haut) */}
-//               <div className="absolute top-10 left-10 right-10 flex justify-between items-start z-10">
-//                 <h3 className="text-xl md:text-3xl font-black tracking-tight text-purple">
-//                   {project.title}
-//                 </h3>
-
-//                 <div className="translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-//                   {project.liveUrl ? (
-//                     <div className="flex items-center gap-2 bg-purple-600/90 backdrop-blur px-5 py-2.5 rounded-full text-xs font-bold tracking-wider">
-//                       <span className="relative flex h-2 w-2">
-//                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-//                         <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
-//                       </span>
-//                       LIVE
-//                     </div>
-//                   ) : (
-//                     <div className="bg-white/10 backdrop-blur px-6 py-2.5 rounded-full text-xs font-medium">
-//                       Bientôt
-//                     </div>
-//                   )}
-//                 </div>
-//               </div>
-
-//               {/* Description + Lien qui monte depuis le bas au hover */}
-//               <div className="absolute bottom-0 left-0 right-0 p-10 md:p-14 text-white translate-y-32 group-hover:translate-y-0 transition-transform duration-800 ease-out">
-//                 <p
-//                   className="text-xl md:text-2xl text-gray-300 font-medium mb-8 leading-relaxed 
-//                               opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100"
-//                 >
-//                   {project.tech}
-//                   <br />
-//                   {project.descri}
-//                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
-//                   Mollitia rem minima fugiat et, eius amet facilis possimus
-//                   deserunt atque! Dicta fugit cumque cupiditate. Ab, mollitia?
-//                   Sint sunt assumenda eaque pariatur.
-//                 </p>
-
-//                 {project.liveUrl && (
-//                   <Link
-//                     href={project.liveUrl}
-//                     target="_blank"
-//                     className="inline-flex items-center gap-3 text-purple-400 font-medium text-lg
-//                                opacity-0 group-hover:opacity-100 translate-y-6 group-hover:translate-y-0 
-//                                transition-all duration-700 delay-200 hover:text-white"
-//                   >
-//                     Voir le projet <ExternalLink className="w-6 h-6" />
-//                   </Link>
-//                 )}
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-// app/projets/page.tsx ou components/Projects.tsx
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
-import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 
-const projects = [
+gsap.registerPlugin(ScrollTrigger);
+
+interface ProjectType {
+  id: number;
+  title: string;
+  tech: string;
+  image: string;
+  liveUrl?: string;
+}
+
+const projects: ProjectType[] = [
   {
+    id: 1,
     title: "Times261",
     tech: "Laravel · PHP · React",
-    descri: "Gestion d'un site de journal de Madagascar",
     image: "/ordi.jfif",
     liveUrl: "https://times261.com",
   },
   {
+    id: 2,
     title: "Rental System",
     tech: "Next.js · SpringBoot · Java",
-    descri: "Plateforme pour la gestion de réservation et location de voiture",
     image: "/ordi.jfif",
     liveUrl: "https://rental.mg-transp.com",
   },
   {
+    id: 3,
     title: "C.A.R Platform",
     tech: "Next.js · TypeScript · Tailwind",
-    descri: "Développement du site web de l'entreprise",
     image: "/ordi.jfif",
     liveUrl: "https://cartaxaudit.com",
   },
   {
+    id: 4,
     title: "ERP C.A.R",
     tech: "React · SpringBoot · Java",
-    descri: "Plateforme pour la gestion d'entreprise",
     image: "/ordi.jfif",
     liveUrl: "https://erp.cartaxaudit.com",
   },
-  {
-    title: "Pointage RH",
-    tech: "Laravel · PHP",
-    descri: "Gestion de pointage d'employés par empreinte digitale",
-    image: "/ordi.jfif",
-    soon: true,
-  },
+  { id: 5, title: "Pointage RH", tech: "Laravel · PHP", image: "/ordi.jfif" },
 ];
 
 export default function Projects() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
+
+      gsap.set(cards, {
+        opacity: 0,
+        y: 60,
+        scale: 0.97,
+        filter: "blur(6px)",
+        transformOrigin: "center center",
+      });
+
+      gsap.to(cards, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        filter: "blur(0px)",
+        duration: 0.9,
+        ease: "power3.out",
+        stagger: 0.12,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 72%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="min-h-screen bg-black py-32 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-8xl md:text-9xl lg:text-[12rem] font-black tracking-tighter text-center mb-32 text-white/90">
+    <section
+      ref={sectionRef}
+      id="projets"
+      className="bg-black px-6 py-20 text-white md:px-8 md:py-28"
+    >
+      <div className="mx-auto max-w-7xl">
+        <h2 className="font-display mb-16 text-center text-4xl font-normal tracking-[0.08em] sm:text-5xl md:mb-24 md:text-6xl lg:text-7xl">
           Projets
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10 lg:gap-14">
           {projects.map((project, i) => (
             <div
-              key={i}
-              className="group relative h-[560px] rounded-3xl overflow-hidden bg-white/5 backdrop-blur border border-white/10 
-                         transition-all duration-700 hover:border-purple-500/30 hover:shadow-2xl hover:shadow-purple-500/20"
+              key={project.id}
+              ref={(el) => {
+                cardsRef.current[i] = el;
+              }}
+              className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:border-white/20 hover:bg-white/10 hover:shadow-2xl hover:shadow-purple-500/15"
             >
-              {/* Image + zoom */}
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                className="object-cover transition-transform duration-1200 ease-out group-hover:scale-110"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-
-              {/* Overlay global sombre */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-
-              {/* Titre toujours visible en haut */}
-              <div className="absolute top-10 left-10 z-20">
-                <h3 className="text-  xl md:text-2xl font-black tracking-tight text-purple-500">
-                  {project.title}
-                </h3>
-              </div>
-
-              {/* Badge LIVE / Bientôt (apparaît au hover) */}
-              <div className="absolute top-10 right-10 z-20 opacity-0 translate-y-4 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-600 delay-100">
-                {project.liveUrl ? (
-                  <div className="flex items-center gap-2 bg-purple-600/90 backdrop-blur px-5 py-2.5 rounded-full text-xs font-bold tracking-wider">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
-                    </span>
-                    LIVE
-                  </div>
-                ) : (
-                  <div className="bg-white/10 backdrop-blur px-6 py-2.5 rounded-full text-xs font-medium text-gray-300">
-                    Bientôt
-                  </div>
-                )}
-              </div>
-
-              {/* === PLAQUE DE FOND + CONTENU QUI MONTE === */}
-              <div className="absolute bottom-0 left-0 right-0 translate-y-48 group-hover:translate-y-0 transition-transform duration-900 ease-out">
-                <div className="mx-8 md:mx-12 mb-8 md:mb-12 p-10 md:p-12 rounded-3xl 
-                                bg-gradient-to-t from-purple-900/50 via-purple-900/20 to-transparent 
-                                backdrop-blur-xl border border-purple-500/30 
-                                shadow-2xl shadow-purple-600/30">
-                  <div className="space-y-6">
-                    {/* Tech stack */}
-                    <p className="text-lg md:text-xl text-purple-200 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200">
-                      {project.tech}
-                    </p>
-
-                    {/* Description longue */}
-                    <p className="text-base md:text-lg text-gray-300 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-300">
-                      {project.descri}
-                    </p>
-
-                    {/* Lien */}
-                    {project.liveUrl && (
-                      <Link
-                        href={project.liveUrl}
-                        target="_blank"
-                        className="inline-flex items-center gap-3 text-purple-400 font-semibold text-lg
-                                   opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 
-                                   transition-all duration-700 delay-500 hover:text-purple-300"
-                      >
-                        Voir le projet
-                        <ExternalLink className="w-6 h-6 transition-transform group-hover:translate-x-1" />
-                      </Link>
-                    )}
-                  </div>
+              {project.liveUrl ? (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <ProjectCard project={project} hasLink />
+                </a>
+              ) : (
+                <div className="cursor-default">
+                  <ProjectCard project={project} />
                 </div>
-              </div>
+              )}
             </div>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function ProjectCard({
+  project,
+  hasLink = false,
+}: {
+  project: ProjectType;
+  hasLink?: boolean;
+}) {
+  return (
+    <>
+      <div className="relative aspect-video overflow-hidden bg-zinc-950">
+        <Image
+          src={project.image}
+          alt={project.title}
+          fill
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, 50vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
+
+        {hasLink ? (
+          <div className="absolute right-4 top-4 rounded-full bg-purple-600/90 px-3 py-2 text-[10px] font-bold tracking-[0.25em] backdrop-blur md:right-6 md:top-6 md:px-4">
+            <span className="relative mr-2 inline-flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
+            </span>
+            LIVE
+          </div>
+        ) : (
+          <div className="absolute right-4 top-4 rounded-full bg-white/10 px-3 py-2 text-[10px] font-medium backdrop-blur md:right-6 md:top-6 md:px-5">
+            
+          </div>
+        )}
+      </div>
+
+      <div className="space-y-3 p-6 md:p-8 lg:p-10">
+        <div className="flex items-start justify-between gap-4">
+          <h3 className="text-2xl font-semibold tracking-tight transition-colors duration-500 group-hover:text-purple-100 sm:text-3xl md:text-4xl">
+            {project.title}
+          </h3>
+          {hasLink && (
+            <ExternalLink className="h-5 w-5 shrink-0 text-purple-400 opacity-0 translate-y-3 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:h-6 sm:w-6" />
+          )}
+        </div>
+        <p className="text-sm font-medium text-gray-400 sm:text-base md:text-lg">
+          {project.tech}
+        </p>
+      </div>
+    </>
   );
 }
