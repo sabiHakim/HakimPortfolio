@@ -1,8 +1,6 @@
 
 import type { Metadata } from "next";
 import { Bebas_Neue, Space_Grotesk } from "next/font/google";
-// Type-only/side-effect CSS import: suppress missing type declarations
-// @ts-expect-error: Cannot find module or type declarations for side-effect import of './globals.css'
 import "./globals.css";
 import Header from "./components/Header";
 // import Cursor from "./components/Cursor";
@@ -18,9 +16,52 @@ const bebasNeue = Bebas_Neue({
   variable: "--font-bebas-neue",
 });
 
+const siteUrl = "https://sabihakim.github.io/HakimPortfolio";
+const title = "Hakim Sabi — Développeur Fullstack";
+const description =
+  "Portfolio de RAKOTOALIMANANA Ny Harijaona Hakim Sabi, développeur fullstack basé à Madagascar. Next.js, React, Laravel, Spring Boot — sites, ERP et applications web sur mesure.";
+
 export const metadata: Metadata = {
-  title: "Hakim - Portfolio",
-  description: "Développeur ",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: title,
+    template: "%s — Hakim Sabi",
+  },
+  description,
+  keywords: [
+    "Hakim Sabi",
+    "Rakotoalimanana",
+    "développeur fullstack",
+    "développeur web Madagascar",
+    "Next.js",
+    "React",
+    "Laravel",
+    "Spring Boot",
+    "portfolio développeur",
+  ],
+  authors: [{ name: "RAKOTOALIMANANA Ny Harijaona Hakim Sabi" }],
+  creator: "Hakim Sabi",
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: siteUrl,
+    siteName: "Hakim Sabi — Portfolio",
+    title,
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  icons: {
+    icon: `${siteUrl}/icon`,
+    apple: `${siteUrl}/apple-icon`,
+  },
 };
 
 export default function RootLayout({

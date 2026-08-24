@@ -4,7 +4,19 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
+import type { IconType } from "react-icons";
+import {
+  SiOpenjdk,
+  SiPhp,
+  SiJavascript,
+  SiTypescript,
+  SiNextdotjs,
+  SiReact,
+  SiPostgresql,
+  SiTailwindcss,
+  SiGit,
+  SiDocker,
+} from "react-icons/si";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,42 +27,18 @@ export default function About() {
   const textRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
 
-  // Ta stack avec logos officiels (SVG/PNG en blanc ou transparent)
-  const stack = [
-    { name: "Java", logo: "https://cdn.worldvectorlogo.com/logos/java-4.svg" },
-    {
-      name: "PHP",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg",
-    },
-    {
-      name: "JavaScript",
-      logo: "https://cdn.worldvectorlogo.com/logos/javascript-1.svg",
-    },
-    {
-      name: "TypeScript",
-      logo: "https://cdn.worldvectorlogo.com/logos/typescript.svg",
-    },
-    {
-      name: "Next.js",
-      logo: "https://assets.vercel.com/image/upload/front/assets/design/nextjs-white-logo.svg",
-    },
-    {
-      name: "React",
-      logo: "https://cdn.worldvectorlogo.com/logos/react-2.svg",
-    },
-    {
-      name: "PostgreSQL",
-      logo: "https://cdn.worldvectorlogo.com/logos/postgresql.svg",
-    },
-    {
-      name: "Tailwind",
-      logo: "https://cdn.worldvectorlogo.com/logos/tailwind-css-2.svg",
-    },
-    { name: "Git", logo: "https://cdn.worldvectorlogo.com/logos/git-icon.svg" },
-    {
-      name: "Docker",
-      logo: "https://cdn.worldvectorlogo.com/logos/docker-4.svg",
-    },
+  // Stack technique — icônes locales (react-icons), pas de dépendance CDN externe
+  const stack: { name: string; Icon: IconType }[] = [
+    { name: "Java", Icon: SiOpenjdk },
+    { name: "PHP", Icon: SiPhp },
+    { name: "JavaScript", Icon: SiJavascript },
+    { name: "TypeScript", Icon: SiTypescript },
+    { name: "Next.js", Icon: SiNextdotjs },
+    { name: "React", Icon: SiReact },
+    { name: "PostgreSQL", Icon: SiPostgresql },
+    { name: "Tailwind", Icon: SiTailwindcss },
+    { name: "Git", Icon: SiGit },
+    { name: "Docker", Icon: SiDocker },
   ];
 
   useEffect(() => {
@@ -110,15 +98,17 @@ export default function About() {
       // Pause douce + petit glow violet au hover
       marquee.addEventListener("mouseenter", () => {
         gsap.to(marquee, { timeScale: 0.15, ease: "power2.out" });
-        gsap.to(marquee.querySelectorAll("img"), {
-          filter: "brightness(1) drop-shadow(0 0 20px rgba(168, 85, 247, 0.6))",
+        gsap.to(marquee.querySelectorAll("svg"), {
+          filter: "drop-shadow(0 0 20px rgba(168, 85, 247, 0.6))",
+          color: "#a855f7",
           duration: 0.6,
         });
       });
       marquee.addEventListener("mouseleave", () => {
         gsap.to(marquee, { timeScale: 1, ease: "power2.out" });
-        gsap.to(marquee.querySelectorAll("img"), {
-          filter: "brightness(0.9)",
+        gsap.to(marquee.querySelectorAll("svg"), {
+          filter: "none",
+          color: "rgba(255,255,255,0.9)",
           duration: 0.8,
         });
       });
@@ -175,16 +165,16 @@ export default function About() {
             ref={marqueeRef}
             className="flex items-center gap-20 md:gap-32 py-12 whitespace-nowrap"
           >
-            {stack.map((tech, i) => (
-              <div key={i} className="flex-shrink-0">
-                <Image
-                  src={tech.logo}
-                  alt={tech.name}
-                  width={140}
-                  height={140}
-                  className="h-24 md:h-32 lg:h-40 w-auto object-contain brightness-90 transition-all duration-500"
-                  priority={i < 8}
-                />
+            {stack.map(({ name, Icon }, i) => (
+              <div
+                key={i}
+                title={name}
+                className="flex shrink-0 flex-col items-center gap-3"
+              >
+                <Icon className="h-16 w-16 text-white/90 transition-all duration-500 md:h-20 md:w-20 lg:h-24 lg:w-24" />
+                <span className="text-xs tracking-[0.2em] text-white/40">
+                  {name.toUpperCase()}
+                </span>
               </div>
             ))}
           </div>

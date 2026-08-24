@@ -12,6 +12,7 @@ import {
   Download,
   Send,
 } from "lucide-react";
+import { withBasePath } from "../lib/basePath";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -169,7 +170,7 @@ export default function Contact() {
 
           <div ref={socialsRef} className="flex flex-wrap gap-3 pt-2">
             <a
-              href="/cv_Hakim.pdf"
+              href={withBasePath("/cv_Hakim.pdf")}
               download
               className="group inline-flex items-center gap-3 rounded-full border border-white/10 bg-white px-5 py-3 text-sm font-semibold text-black transition-all duration-300 hover:scale-[1.02] hover:bg-white/90"
             >

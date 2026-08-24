@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
+import { withBasePath } from "../lib/basePath";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -136,7 +137,7 @@ function ProjectCard({
     <>
       <div className="relative aspect-video overflow-hidden bg-zinc-950">
         <Image
-          src={project.image}
+          src={withBasePath(project.image)}
           alt={project.title}
           fill
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -153,8 +154,8 @@ function ProjectCard({
             LIVE
           </div>
         ) : (
-          <div className="absolute right-4 top-4 rounded-full bg-white/10 px-3 py-2 text-[10px] font-medium backdrop-blur md:right-6 md:top-6 md:px-5">
-            
+          <div className="absolute right-4 top-4 rounded-full bg-white/10 px-3 py-2 text-[10px] font-bold tracking-[0.25em] backdrop-blur md:right-6 md:top-6 md:px-4">
+            PRIVÉ
           </div>
         )}
       </div>
