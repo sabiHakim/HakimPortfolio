@@ -12,6 +12,7 @@ import {
   Download,
   Send,
 } from "lucide-react";
+import { withBasePath } from "../lib/basePath";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -126,7 +127,7 @@ export default function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative overflow-hidden bg-black px-6 py-24 text-white md:px-8 md:py-32"
+      className="relative overflow-hidden px-6 py-24 text-white md:px-8 md:py-32"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(168,85,247,0.14),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.08),transparent_30%)]" />
 
@@ -169,7 +170,7 @@ export default function Contact() {
 
           <div ref={socialsRef} className="flex flex-wrap gap-3 pt-2">
             <a
-              href="/cv_Hakim.pdf"
+              href={withBasePath("/cv_Hakim.pdf")}
               download
               className="group inline-flex items-center gap-3 rounded-full border border-white/10 bg-white px-5 py-3 text-sm font-semibold text-black transition-all duration-300 hover:scale-[1.02] hover:bg-white/90"
             >
@@ -191,7 +192,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <div className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-8 lg:p-10">
+        <div className="rounded-4xl border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-8 lg:p-10">
           <form
             ref={formRef}
             action="https://formspree.io/f/meonarjp"
