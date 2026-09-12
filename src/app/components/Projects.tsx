@@ -13,38 +13,36 @@ interface ProjectType {
   id: number;
   title: string;
   tech: string;
-  image: string;
   liveUrl?: string;
 }
+
+// Image de fond commune à toutes les cartes projet
+const PROJECT_BG = "/project-bg.jpg";
 
 const projects: ProjectType[] = [
   {
     id: 1,
     title: "Times261",
     tech: "Laravel · PHP · React",
-    image: "/ordi.jfif",
     liveUrl: "https://times261.com",
   },
   {
     id: 2,
     title: "Vanga Analytics",
     tech: "React · SpringBoot",
-    image: "/ordi.jfif",
     liveUrl: "https://vanga.mg",
   },
   {
     id: 3,
     title: "C.A.R Platform",
     tech: "Next.js · TypeScript · Tailwind",
-    image: "/ordi.jfif",
   },
   {
     id: 4,
     title: "ERP C.A.R",
     tech: "React · SpringBoot · Java",
-    image: "/ordi.jfif",
   },
-  { id: 5, title: "Pointage RH", tech: "Laravel · PHP", image: "/ordi.jfif" },
+  { id: 5, title: "Pointage RH", tech: "Laravel · PHP" },
 ];
 
 export default function Projects() {
@@ -135,13 +133,13 @@ function ProjectCard({
     <>
       <div className="relative aspect-video overflow-hidden bg-zinc-950">
         <Image
-          src={withBasePath(project.image)}
+          src={withBasePath(PROJECT_BG)}
           alt={project.title}
           fill
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 50vw"
         />
-        <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/25 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/55 via-black/10 to-transparent transition-opacity duration-500 group-hover:opacity-70" />
 
         {hasLink ? (
           <div className="absolute right-4 top-4 rounded-full bg-purple-600/90 px-3 py-2 text-[10px] font-bold tracking-[0.25em] backdrop-blur md:right-6 md:top-6 md:px-4">
