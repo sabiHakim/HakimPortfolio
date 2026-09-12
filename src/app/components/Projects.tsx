@@ -27,24 +27,22 @@ const projects: ProjectType[] = [
   },
   {
     id: 2,
-    title: "Rental System",
-    tech: "Next.js · SpringBoot · Java",
+    title: "Vanga Analytics",
+    tech: "React · SpringBoot",
     image: "/ordi.jfif",
-    liveUrl: "https://rental.mg-transp.com",
+    liveUrl: "https://vanga.mg",
   },
   {
     id: 3,
     title: "C.A.R Platform",
     tech: "Next.js · TypeScript · Tailwind",
     image: "/ordi.jfif",
-    liveUrl: "https://cartaxaudit.com",
   },
   {
     id: 4,
     title: "ERP C.A.R",
     tech: "React · SpringBoot · Java",
     image: "/ordi.jfif",
-    liveUrl: "https://erp.cartaxaudit.com",
   },
   { id: 5, title: "Pointage RH", tech: "Laravel · PHP", image: "/ordi.jfif" },
 ];
