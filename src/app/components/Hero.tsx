@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { withBasePath } from "../lib/basePath";
+import WordReveal from "./WordReveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -120,19 +121,6 @@ export default function Hero() {
         ease: "steps(1)",
       });
 
-      // Subtitle
-      tl.fromTo(
-        subtitleRef.current,
-        { y: 80, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1.4,
-          ease: "power3.out",
-        },
-        "-=0.5"
-      );
-
       // Parallax subtitle
       gsap.to(subtitleRef.current, {
         y: -120,
@@ -206,7 +194,7 @@ export default function Hero() {
             {/* CRÉATIF fixe */}
             <span
               ref={firstLineRef}
-              className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[0.02em] leading-none select-none text-foreground"
+              className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-[0.02em] leading-none select-none text-foreground"
               style={{ perspective: 1000 }}
             >
               DÉVELOPPEUR
@@ -223,7 +211,7 @@ export default function Hero() {
             >
               <span
                 ref={typewriterRef}
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[0.02em] leading-none text-accent"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-[0.02em] leading-none text-accent"
                 style={{ perspective: 1000 }}
               />
               <span
@@ -233,33 +221,32 @@ export default function Hero() {
             </span>
           </h1>
 
-          <p
+          <WordReveal
             ref={subtitleRef}
+            text="Je transforme des idées en applications fonctionnelles, élégantes et performantes."
             className="mt-10 md:mt-14 text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/55 font-normal tracking-wide max-w-3xl mx-auto xl:mx-0"
-          >
-            Je transforme des idées en applications fonctionnelles, élégantes et performantes.
-          </p>
+          />
         </div>
 
         {/* Photo : plaque à coins, ne recouvre jamais le texte */}
         <div
           ref={photoRef}
-          className="relative hidden shrink-0 xl:block"
+          className="relative shrink-0"
           style={{ perspective: 1200 }}
         >
           <div
             ref={photoPlateRef}
-            className="relative h-[480px] w-[260px] overflow-hidden rounded-sm border border-foreground/10 bg-surface-dark-raised p-2 xl:h-[600px] xl:w-[300px]"
+            className="relative aspect-[4/5] w-64 overflow-hidden rounded-sm border border-foreground/10 bg-surface-dark-raised p-2 xl:w-80"
             style={{ transformStyle: "preserve-3d" }}
           >
             <div className="relative h-full w-full overflow-hidden">
               <Image
-                src={withBasePath("/hakim-full-tight.jpg")}
+                src={withBasePath("/hakim-headshot.jpg")}
                 alt="Hakim Sabi"
                 fill
                 priority
                 className="object-cover object-top"
-                sizes="300px"
+                sizes="320px"
               />
             </div>
 

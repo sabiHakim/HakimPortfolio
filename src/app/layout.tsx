@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { Oswald, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
-import CursorGlow from "./components/CursorGlow";
+import CustomCursor from "./components/CustomCursor";
 import { SmoothScroll } from "./components/SmoothScroll";
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -78,7 +78,7 @@ export default function RootLayout({
       <body
         className={`${spaceGrotesk.variable} ${oswald.variable} bg-background text-foreground overflow-x-hidden font-sans`}
       >
-        <CursorGlow />
+        <CustomCursor />
         <SmoothScroll>
           <Header />
           <div className="relative z-10 animate-page-in">{children}</div>

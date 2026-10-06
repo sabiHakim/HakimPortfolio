@@ -50,6 +50,7 @@ export default function Header() {
 
           <button
             onClick={() => setIsOpen(!isOpen)}
+            data-cursor="hover"
             className="relative w-10 h-10 md:hidden z-50"
             aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
             aria-expanded={isOpen}
@@ -65,6 +66,7 @@ export default function Header() {
               <button
                 key={s.id}
                 onClick={() => scrollTo(`#${s.id}`)}
+                data-cursor="hover"
                 className="group relative py-1 uppercase text-foreground/80 transition-colors duration-300 hover:text-foreground"
               >
                 {s.name}
@@ -89,6 +91,7 @@ export default function Header() {
             <button
               key={s.id}
               onClick={() => scrollTo(`#${s.id}`)}
+              data-cursor="hover"
               className="text-foreground hover:text-accent transition-colors duration-500"
             >
               {s.name}

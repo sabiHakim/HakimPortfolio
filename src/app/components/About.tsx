@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { withBasePath } from "../lib/basePath";
+import WordReveal from "./WordReveal";
 import type { IconType } from "react-icons";
 import {
   SiOpenjdk,
@@ -56,7 +57,7 @@ export default function About() {
     const ctx = gsap.context(() => {
       if (prefersReducedMotion) {
         gsap.set(lineRef.current, { scaleX: 1 });
-        gsap.set([photoRef.current, textRef.current], { opacity: 1, y: 0, scale: 1 });
+        gsap.set(photoRef.current, { opacity: 1, y: 0, scale: 1 });
       } else {
         const tl = gsap.timeline({
           scrollTrigger: { trigger: containerRef.current, start: "top 70%" },
@@ -92,13 +93,6 @@ export default function About() {
           { y: 80, opacity: 0, scale: 0.96 },
           { y: 0, opacity: 1, scale: 1, duration: 1.4, ease: "power3.out" },
           "-=1"
-        );
-
-        tl.fromTo(
-          textRef.current,
-          { y: 100, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1.4, ease: "power3.out" },
-          "-=1.2"
         );
       }
 
@@ -156,10 +150,10 @@ export default function About() {
     <section
       id="apropos"
       ref={containerRef}
-      className="relative min-h-screen bg-surface-dark text-white py-32 overflow-hidden"
+      className="relative min-h-screen bg-surface-dark text-white pt-20 pb-32 md:pt-24 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-8">
-        <div className="mb-12 flex items-center gap-4 md:mb-20">
+        <div className="mb-4 flex items-center gap-4 md:mb-6">
           <span className="text-xs font-medium uppercase tracking-[0.3em] text-white/40">
             the season so far
           </span>
@@ -168,24 +162,24 @@ export default function About() {
 
         <h2
           ref={titleRef}
-          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[0.02em] leading-none mb-12 md:mb-16 select-none"
+          className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[0.02em] leading-none mb-6 md:mb-8 select-none"
           style={{ perspective: 1200 }}
         >
           À propos
         </h2>
 
-        <div className="grid gap-12 lg:grid-cols-[260px_1fr] lg:gap-16 lg:items-start">
+        <div className="grid gap-12 lg:grid-cols-[320px_1fr] lg:gap-16 lg:items-start">
           <div
             ref={photoRef}
-            className="relative mx-auto aspect-[484/1145] w-full max-w-[240px] overflow-hidden rounded-sm bg-black/40 p-2 lg:mx-0"
+            className="relative mx-auto aspect-[4/5] w-64 overflow-hidden rounded-sm bg-black/40 p-2 lg:mx-0 lg:w-80"
           >
             <div className="relative h-full w-full overflow-hidden">
               <Image
-                src={withBasePath("/hakim-portrait-tight.jpg")}
+                src={withBasePath("/hakim-headshot-about.jpg")}
                 alt="RAKOTOALIMANANA Ny Harijaona Hakim Sabi"
                 fill
                 className="object-cover object-top"
-                sizes="240px"
+                sizes="320px"
               />
             </div>
             {[
@@ -205,54 +199,59 @@ export default function About() {
             ))}
           </div>
 
-          <div
-            ref={textRef}
-            className="space-y-6 text-base sm:text-lg md:text-xl lg:text-2xl text-white/65 leading-relaxed"
-          >
-            <p>
-              Je suis{" "}
-              <span className="text-white font-bold">
-                RAKOTOALIMANANA Ny Harijaona Hakim Sabi
-              </span>
-              ,<br />
-              développeur{" "}
-              <span className="text-white font-bold">fullstack créatif</span> basé
-              à Madagascar.
-            </p>
-            <p>
-              Passionné par le code propre, les performances extrêmes et les
-              interfaces qui marquent les esprits.
-            </p>
-            <p className="mt-10 text-xl sm:text-2xl md:text-3xl font-bold text-accent">
-              Mes stacks techniques :
-            </p>
+          <div ref={textRef} className="space-y-6 leading-relaxed">
+            <WordReveal
+              text="Je suis RAKOTOALIMANANA Ny Harijaona Hakim Sabi, développeur fullstack créatif basé à Madagascar."
+              className="text-lg font-semibold text-white sm:text-xl md:text-2xl lg:text-3xl"
+            />
+            <WordReveal
+              text="Passionné par le code propre, les performances extrêmes et les interfaces qui marquent les esprits."
+              className="text-base text-white/60 sm:text-lg md:text-xl"
+              start="top 90%"
+            />
           </div>
         </div>
 
         {/* MARQUEE INFINI AVEC LOGOS + GLOW CYAN AU HOVER */}
-        <div className="mt-20 overflow-hidden">
-          <div
-            ref={marqueeRef}
-            className="flex items-center gap-20 md:gap-32 py-12 whitespace-nowrap"
-          >
-            {stack.map(({ name, Icon }, i) => (
-              <div
-                key={i}
-                title={name}
-                className="flex shrink-0 flex-col items-center gap-3"
-              >
-                <Icon className="h-16 w-16 text-white/90 transition-all duration-500 md:h-20 md:w-20 lg:h-24 lg:w-24" />
-                <span className="text-xs tracking-[0.2em] text-white/40">
-                  {name.toUpperCase()}
-                </span>
-              </div>
-            ))}
+        <div className="mt-24 md:mt-32">
+          <div className="mb-8 flex items-center gap-4 md:mb-12">
+            <span className="text-xs font-medium uppercase tracking-[0.3em] text-white/40">
+              stack technique
+            </span>
+            <div className="h-px flex-1 bg-white/10" />
+          </div>
+
+          <div className="overflow-hidden">
+            <div
+              ref={marqueeRef}
+              data-cursor="hover"
+              className="flex items-center gap-20 md:gap-32 py-4 whitespace-nowrap"
+            >
+              {stack.map(({ name, Icon }, i) => (
+                <div
+                  key={i}
+                  title={name}
+                  className="flex shrink-0 flex-col items-center gap-3"
+                >
+                  <Icon className="h-16 w-16 text-white/90 transition-all duration-500 md:h-20 md:w-20 lg:h-24 lg:w-24" />
+                  <span className="text-xs tracking-[0.2em] text-white/40">
+                    {name.toUpperCase()}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        <p className="mt-32 text-2xl text-white/40 italic text-center">
-          Disponible immédiatement · Freelance ou CDI · Contacte-moi
-        </p>
+        <div className="mt-24 flex justify-center md:mt-32">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-5 py-2.5 text-sm text-white/50">
+            <span className="relative inline-flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+            </span>
+            Disponible immédiatement · Freelance ou CDI
+          </span>
+        </div>
       </div>
     </section>
   );

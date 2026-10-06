@@ -77,6 +77,16 @@ body {
   scrollbar-color: rgba(2, 210, 227, 0.5) transparent;
 }
 
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a,
+  button {
+    cursor: none;
+  }
+}
+
 body::-webkit-scrollbar {
   width: 10px;
 }

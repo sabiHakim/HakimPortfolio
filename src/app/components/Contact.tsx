@@ -13,6 +13,9 @@ import {
   Send,
 } from "lucide-react";
 import { withBasePath } from "../lib/basePath";
+import WordReveal from "./WordReveal";
+import FluidButton from "./FluidButton";
+import MagneticButton from "./MagneticButton";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -137,20 +140,17 @@ export default function Contact() {
             <p className="text-sm font-semibold uppercase tracking-[0.35em] text-accent">
               Contact
             </p>
-            <h2 className="font-display max-w-xl text-5xl font-bold tracking-[0.01em] text-balance sm:text-6xl lg:text-8xl">
+            <h2 className="font-display max-w-xl text-4xl font-bold tracking-[0.01em] text-balance sm:text-5xl lg:text-6xl">
               Let&apos;s build something great together.
             </h2>
           </div>
 
           <div ref={introRef} className="max-w-xl space-y-5 text-base leading-8 text-foreground/65 sm:text-lg">
-            <p>
-              Si tu as un projet, une idee a concretiser ou juste envie
-              d&apos;echanger, je suis disponible pour en parler.
-            </p>
-            <p>
-              Je privilegie des interfaces propres, rapides et adaptatives pour
-              que ton site reste beau sur mobile comme sur grand ecran.
-            </p>
+            <WordReveal text="Si tu as un projet, une idee a concretiser ou juste envie d'echanger, je suis disponible pour en parler." />
+            <WordReveal
+              text="Je privilegie des interfaces propres, rapides et adaptatives pour que ton site reste beau sur mobile comme sur grand ecran."
+              start="top 90%"
+            />
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
@@ -169,25 +169,28 @@ export default function Contact() {
           </div>
 
           <div ref={socialsRef} className="flex flex-wrap gap-3 pt-2">
-            <a
+            <FluidButton
+              as="a"
               href={withBasePath("/cv_Hakim.pdf")}
               download
-              className="group inline-flex items-center gap-3 rounded-full bg-foreground px-5 py-3 text-sm font-semibold text-background transition-all duration-300 hover:scale-[1.02] hover:bg-accent hover:text-black"
+              circleClassName="bg-accent"
+              className="rounded-full border border-foreground/20 bg-transparent px-5 py-3 text-sm font-semibold text-foreground transition-colors duration-300"
             >
-              <Download className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
-              Télécharger CV
-            </a>
+              <Download className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5 group-hover:text-black" />
+              <span className="group-hover:text-black">Télécharger CV</span>
+            </FluidButton>
             {socials.map(({ label, href, icon: Icon }) => (
-              <a
-                key={label}
-                href={href}
-                target={href.startsWith("http") ? "_blank" : undefined}
-                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="group inline-flex items-center gap-3 rounded-full border border-foreground/10 bg-foreground/[0.03] px-5 py-3 text-sm font-medium text-foreground/80 transition-all duration-300 hover:border-accent/40 hover:bg-accent/10 hover:text-foreground"
-              >
-                <Icon className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5" />
-                {label}
-              </a>
+              <MagneticButton key={label} className="inline-block">
+                <a
+                  href={href}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="group inline-flex items-center gap-3 rounded-full border border-foreground/10 bg-foreground/[0.03] px-5 py-3 text-sm font-medium text-foreground/80 transition-all duration-300 hover:border-accent/40 hover:bg-accent/10 hover:text-foreground"
+                >
+                  <Icon className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5" />
+                  {label}
+                </a>
+              </MagneticButton>
             ))}
           </div>
         </div>
@@ -236,21 +239,23 @@ export default function Contact() {
             </label>
 
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <button
+              <FluidButton
                 type="submit"
                 disabled={status === "sending"}
-                className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-accent px-6 py-4 text-sm font-semibold text-black shadow-lg shadow-accent/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-accent/30 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+                circleClassName="bg-foreground"
+                className="w-full rounded-full bg-accent px-6 py-4 text-sm font-semibold text-black shadow-lg shadow-accent/20 transition-shadow duration-300 hover:shadow-accent/30 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
               >
-                <span className="transition-transform duration-300 group-hover:-translate-y-0.5">
+                <span className="transition-colors duration-300 group-hover:text-background">
                   {status === "sending" ? "Envoi en cours..." : "Envoyer"}
                 </span>
-                <Send className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
+                <Send className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-background" />
+              </FluidButton>
 
               <p className="text-sm text-foreground/45">
                 Ou ecris directement a{" "}
                 <a
                   href="mailto:srakotoalimanana@gmail.com"
+                  data-cursor="hover"
                   className="font-medium text-foreground/80 underline underline-offset-4 transition-colors hover:text-accent"
                 >
                   srakotoalimanana@gmail.com
