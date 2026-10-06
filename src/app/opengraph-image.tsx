@@ -15,10 +15,10 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          backgroundColor: "#000000",
+          backgroundColor: "#090a0b",
           backgroundImage:
-            "radial-gradient(circle at 15% 15%, rgba(168,85,247,0.35), transparent 45%)",
-          color: "#ffffff",
+            "radial-gradient(circle at 15% 15%, rgba(2,210,227,0.30), transparent 45%)",
+          color: "#f7fafb",
           fontFamily: "sans-serif",
         }}
       >
@@ -27,7 +27,7 @@ export default function OpengraphImage() {
             display: "flex",
             width: 90,
             height: 2,
-            background: "rgba(255,255,255,0.4)",
+            background: "rgba(247,250,251,0.3)",
             marginBottom: 40,
           }}
         />
@@ -39,7 +39,7 @@ export default function OpengraphImage() {
             display: "flex",
             marginTop: 16,
             fontSize: 40,
-            color: "#a855f7",
+            color: "#02d2e3",
             fontWeight: 600,
           }}
         >
@@ -50,7 +50,7 @@ export default function OpengraphImage() {
             display: "flex",
             marginTop: 32,
             fontSize: 28,
-            color: "rgba(255,255,255,0.6)",
+            color: "rgba(247,250,251,0.55)",
           }}
         >
           Next.js · React · Laravel · Spring Boot — Madagascar

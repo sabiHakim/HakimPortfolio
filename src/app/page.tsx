@@ -1,14 +1,10 @@
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Projects from "./components/Projects";
+import StickyStack from "./components/StickyStack";
 import Contact from "./components/Contact";
 
 export default function Home() {
   return (
     <main>
-      <Hero />
-      <About />
-      <Projects />
+      <StickyStack />
       <Contact />
     </main>
   );

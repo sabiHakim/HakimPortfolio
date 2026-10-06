@@ -1,19 +1,19 @@
 
 import type { Metadata, Viewport } from "next";
-import { Bebas_Neue, Space_Grotesk } from "next/font/google";
+import { Oswald, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
-import CursorGlow from "./components/CursorGlow";
+import CustomCursor from "./components/CustomCursor";
 import { SmoothScroll } from "./components/SmoothScroll";
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
 });
 
-const bebasNeue = Bebas_Neue({
+const oswald = Oswald({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-bebas-neue",
+  weight: ["500", "700"],
+  variable: "--font-oswald",
 });
 
 const siteUrl = "https://sabihakim.github.io/HakimPortfolio";
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#090a0b",
 };
 
 export default function RootLayout({
@@ -76,13 +76,9 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${spaceGrotesk.variable} ${bebasNeue.variable} bg-black text-white overflow-x-hidden font-sans`}
+        className={`${spaceGrotesk.variable} ${oswald.variable} bg-background text-foreground overflow-x-hidden font-sans`}
       >
-        <div
-          aria-hidden
-          className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_20%_-10%,rgba(168,85,247,0.16),transparent_40%),radial-gradient(circle_at_85%_15%,rgba(255,255,255,0.05),transparent_35%),radial-gradient(circle_at_50%_100%,rgba(168,85,247,0.1),transparent_45%)]"
-        />
-        <CursorGlow />
+        <CustomCursor />
         <SmoothScroll>
           <Header />
           <div className="relative z-10 animate-page-in">{children}</div>
