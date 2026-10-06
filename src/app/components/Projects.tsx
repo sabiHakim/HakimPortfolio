@@ -47,6 +47,31 @@ const projects: ProjectType[] = [
     liveUrl: "https://erp.cartaxaudit.com",
   },
   { id: 5, title: "Pointage RH", tech: "Laravel · PHP", image: "/ordi.jfif" },
+  {
+    id: 6,
+    title: "Ikaly",
+    tech: "Tauri · Rust · React",
+    image: "/ordi.jfif",
+  },
+  {
+    id: 7,
+    title: "Reserveo",
+    tech: "React · TypeScript · Tauri · Rust",
+    image: "/ordi.jfif",
+  },
+  {
+    id: 8,
+    title: "Vestora",
+    tech: "React · Tauri · Rust",
+    image: "/ordi.jfif",
+  },
+  {
+    id: 9,
+    title: "Vanga Analytics",
+    tech: "React · SpringBoot",
+    image: "/ordi.jfif",
+    liveUrl: "https://vanga.mg",
+  },
 ];
 
 export default function Projects() {
