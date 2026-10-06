@@ -29,9 +29,26 @@ body {
 
 @import "tailwindcss";
 
+:root {
+  /* Palette sombre + accent cyan */
+  --background: #090a0b;
+  --foreground: #f7fafb;
+  --foreground-muted: rgb(247 250 251 / 0.5);
+  --surface-dark: #0e0f14;
+  --surface-dark-raised: #1b1d24;
+  --border-muted: rgb(247 250 251 / 0.12);
+  --accent: #02d2e3;
+  --accent-muted: rgb(2 210 227 / 0.25);
+}
+
 @theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-surface-dark: var(--surface-dark);
+  --color-surface-dark-raised: var(--surface-dark-raised);
   --font-sans: var(--font-space-grotesk);
-  --font-display: var(--font-bebas-neue);
+  --font-display: var(--font-oswald);
 }
 
 /* Tu peux remettre tes styles custom après l'import */
@@ -48,8 +65,8 @@ body {
 }
 
 ::selection {
-  background: #a855f7;
-  color: #fff;
+  background: var(--accent);
+  color: #000;
 }
 
 body {
@@ -57,7 +74,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scrollbar-color: rgba(168, 85, 247, 0.5) transparent;
+  scrollbar-color: rgba(2, 210, 227, 0.5) transparent;
 }
 
 body::-webkit-scrollbar {
@@ -69,17 +86,18 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background: rgba(168, 85, 247, 0.4);
+  background: rgba(2, 210, 227, 0.4);
   border-radius: 999px;
-  border: 2px solid #000;
+  border: 2px solid var(--background);
 }
 
 body::-webkit-scrollbar-thumb:hover {
-  background: rgba(168, 85, 247, 0.7);
+  background: rgba(2, 210, 227, 0.7);
 }
 
 .font-display {
   font-family: var(--font-display), sans-serif;
+  text-transform: uppercase;
 }
 
 @keyframes page-in {

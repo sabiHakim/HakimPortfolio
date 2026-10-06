@@ -88,10 +88,17 @@ export default function Projects() {
     <section
       ref={sectionRef}
       id="projets"
-      className="px-6 py-20 text-white md:px-8 md:py-28"
+      className="bg-surface-dark px-6 py-20 text-white md:px-8 md:py-28"
     >
       <div className="mx-auto max-w-7xl">
-        <h2 className="font-display mb-16 text-center text-4xl font-normal tracking-[0.08em] sm:text-5xl md:mb-24 md:text-6xl lg:text-7xl">
+        <div className="mb-12 flex items-center justify-center gap-4 md:mb-16">
+          <span className="text-xs font-medium uppercase tracking-[0.3em] text-white/40">
+            from karts to full-stack
+          </span>
+          <div className="h-px w-24 bg-white/20 md:w-40" />
+        </div>
+
+        <h2 className="font-display mb-16 text-center text-4xl font-bold tracking-[0.02em] sm:text-5xl md:mb-24 md:text-6xl lg:text-7xl">
           Projets
         </h2>
 
@@ -102,7 +109,7 @@ export default function Projects() {
               ref={(el) => {
                 cardsRef.current[i] = el;
               }}
-              className="group overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:border-white/20 hover:bg-white/10 hover:shadow-2xl hover:shadow-purple-500/15"
+              className="group overflow-hidden rounded-sm border border-white/10 bg-white/5 backdrop-blur-xl transition-all duration-500 hover:-translate-y-1 hover:border-accent/40 hover:bg-white/10 hover:shadow-2xl hover:shadow-accent/15"
             >
               {project.liveUrl ? (
                 <a
@@ -146,10 +153,10 @@ function ProjectCard({
         <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/25 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
 
         {hasLink ? (
-          <div className="absolute right-4 top-4 rounded-full bg-purple-600/90 px-3 py-2 text-[10px] font-bold tracking-[0.25em] backdrop-blur md:right-6 md:top-6 md:px-4">
+          <div className="absolute right-4 top-4 rounded-full bg-accent px-3 py-2 text-[10px] font-bold tracking-[0.25em] text-black backdrop-blur md:right-6 md:top-6 md:px-4">
             <span className="relative mr-2 inline-flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-black/60 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-black/80" />
             </span>
             LIVE
           </div>
@@ -162,14 +169,14 @@ function ProjectCard({
 
       <div className="space-y-3 p-6 md:p-8 lg:p-10">
         <div className="flex items-start justify-between gap-4">
-          <h3 className="text-2xl font-semibold tracking-tight transition-colors duration-500 group-hover:text-purple-100 sm:text-3xl md:text-4xl">
+          <h3 className="text-2xl font-semibold tracking-tight transition-colors duration-500 group-hover:text-accent sm:text-3xl md:text-4xl">
             {project.title}
           </h3>
           {hasLink && (
-            <ExternalLink className="h-5 w-5 shrink-0 text-purple-400 opacity-0 translate-y-3 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:h-6 sm:w-6" />
+            <ExternalLink className="h-5 w-5 shrink-0 text-accent opacity-0 translate-y-3 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:h-6 sm:w-6" />
           )}
         </div>
-        <p className="text-sm font-medium text-gray-400 sm:text-base md:text-lg">
+        <p className="text-sm font-medium text-white/50 sm:text-base md:text-lg">
           {project.tech}
         </p>
       </div>

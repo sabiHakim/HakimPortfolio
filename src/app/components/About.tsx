@@ -122,12 +122,12 @@ export default function About() {
         });
       }
 
-      // Pause douce + petit glow violet au hover
+      // Pause douce + petit glow cyan au hover
       onEnter = () => {
         gsap.to(marquee, { timeScale: 0.15, ease: "power2.out" });
         gsap.to(marquee.querySelectorAll("svg"), {
-          filter: "drop-shadow(0 0 20px rgba(168, 85, 247, 0.6))",
-          color: "#a855f7",
+          filter: "drop-shadow(0 0 20px rgba(2, 210, 227, 0.6))",
+          color: "#02d2e3",
           duration: 0.6,
         });
       };
@@ -156,44 +156,58 @@ export default function About() {
     <section
       id="apropos"
       ref={containerRef}
-      className="text-white py-32 overflow-hidden"
+      className="relative min-h-screen bg-surface-dark text-white py-32 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-8">
-        <div className="w-full max-w-sm mb-12 md:mb-20">
-          <div ref={lineRef} className="h-px bg-white/20 origin-left" />
+        <div className="mb-12 flex items-center gap-4 md:mb-20">
+          <span className="text-xs font-medium uppercase tracking-[0.3em] text-white/40">
+            the season so far
+          </span>
+          <div ref={lineRef} className="h-px w-24 bg-white/20 origin-left md:w-40" />
         </div>
 
         <h2
           ref={titleRef}
-          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-[0.08em] leading-none mb-12 md:mb-16 select-none"
+          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[0.02em] leading-none mb-12 md:mb-16 select-none"
           style={{ perspective: 1200 }}
         >
           À propos
         </h2>
 
-        <div className="grid gap-12 lg:grid-cols-[240px_1fr] lg:gap-16 lg:items-start">
+        <div className="grid gap-12 lg:grid-cols-[260px_1fr] lg:gap-16 lg:items-start">
           <div
             ref={photoRef}
-            className="relative mx-auto aspect-[484/1145] w-full max-w-[220px] lg:mx-0"
-            style={{
-              maskImage:
-                "radial-gradient(ellipse 60% 55% at 50% 38%, black 25%, transparent 100%)",
-              WebkitMaskImage:
-                "radial-gradient(ellipse 60% 55% at 50% 38%, black 25%, transparent 100%)",
-            }}
+            className="relative mx-auto aspect-[484/1145] w-full max-w-[240px] overflow-hidden rounded-sm bg-black/40 p-2 lg:mx-0"
           >
-            <Image
-              src={withBasePath("/hakim-portrait-tight.jpg")}
-              alt="RAKOTOALIMANANA Ny Harijaona Hakim Sabi"
-              fill
-              className="object-contain object-top"
-              sizes="220px"
-            />
+            <div className="relative h-full w-full overflow-hidden">
+              <Image
+                src={withBasePath("/hakim-portrait-tight.jpg")}
+                alt="RAKOTOALIMANANA Ny Harijaona Hakim Sabi"
+                fill
+                className="object-cover object-top"
+                sizes="240px"
+              />
+            </div>
+            {[
+              "left-2 top-2",
+              "right-2 top-2 -scale-x-100",
+              "left-2 bottom-2 -scale-y-100",
+              "right-2 bottom-2 -scale-x-100 -scale-y-100",
+            ].map((pos) => (
+              <svg
+                key={pos}
+                viewBox="0 0 10.5 10.5"
+                className={`pointer-events-none absolute h-3.5 w-3.5 text-accent ${pos}`}
+                aria-hidden="true"
+              >
+                <path d="M0 0.5H10V10.5" fill="none" stroke="currentColor" strokeWidth="1" />
+              </svg>
+            ))}
           </div>
 
           <div
             ref={textRef}
-            className="space-y-6 text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed"
+            className="space-y-6 text-base sm:text-lg md:text-xl lg:text-2xl text-white/65 leading-relaxed"
           >
             <p>
               Je suis{" "}
@@ -209,13 +223,13 @@ export default function About() {
               Passionné par le code propre, les performances extrêmes et les
               interfaces qui marquent les esprits.
             </p>
-            <p className="mt-10 text-xl sm:text-2xl md:text-3xl font-bold text-white/80">
+            <p className="mt-10 text-xl sm:text-2xl md:text-3xl font-bold text-accent">
               Mes stacks techniques :
             </p>
           </div>
         </div>
 
-        {/* MARQUEE INFINI AVEC LOGOS BLANC/NOIR + GLOW VIOLET AU HOVER */}
+        {/* MARQUEE INFINI AVEC LOGOS + GLOW CYAN AU HOVER */}
         <div className="mt-20 overflow-hidden">
           <div
             ref={marqueeRef}
@@ -236,7 +250,7 @@ export default function About() {
           </div>
         </div>
 
-        <p className="mt-32 text-2xl text-gray-500 italic text-center">
+        <p className="mt-32 text-2xl text-white/40 italic text-center">
           Disponible immédiatement · Freelance ou CDI · Contacte-moi
         </p>
       </div>

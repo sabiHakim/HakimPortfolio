@@ -16,6 +16,7 @@ export default function Hero() {
   const lineRef = useRef<HTMLDivElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const photoRef = useRef<HTMLDivElement>(null);
+  const photoPlateRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Mots qui tournent en boucle
@@ -159,20 +160,53 @@ export default function Hero() {
     };
   }, []);
 
+  // Tilt de la photo vers le curseur (pas de depth map : approximation CSS)
+  useEffect(() => {
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const plate = photoPlateRef.current;
+    if (!plate) return;
+
+    const setRotX = gsap.quickTo(plate, "rotationX", { duration: 0.6, ease: "power3.out" });
+    const setRotY = gsap.quickTo(plate, "rotationY", { duration: 0.6, ease: "power3.out" });
+
+    const onMove = (e: PointerEvent) => {
+      const nx = (e.clientX / window.innerWidth) * 2 - 1;
+      const ny = (e.clientY / window.innerHeight) * 2 - 1;
+      setRotY(nx * 6);
+      setRotX(-ny * 4);
+    };
+    const onLeave = () => {
+      setRotX(0);
+      setRotY(0);
+    };
+
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerleave", onLeave);
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerleave", onLeave);
+    };
+  }, []);
+
   return (
-    <section className="min-h-screen flex items-center relative px-8 py-28 overflow-hidden">
+    <section className="min-h-screen flex items-center relative px-8 py-28 overflow-hidden bg-background">
       <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-16 xl:flex-row xl:items-center xl:justify-between xl:gap-12">
         <div className="text-center xl:min-w-0 xl:flex-1 xl:text-left">
-          {/* Ligne */}
-          <div className="w-full max-w-md mx-auto mb-8 md:mb-12 xl:mx-0">
-            <div ref={lineRef} className="h-px bg-white/30 origin-left" />
+          {/* Eyebrow + ligne */}
+          <div className="mb-8 flex items-center justify-center gap-4 md:mb-12 xl:justify-start">
+            <span className="text-xs font-medium uppercase tracking-[0.3em] text-foreground/50">
+              developer_01
+            </span>
+            <div ref={lineRef} className="h-px w-24 bg-foreground/20 origin-left md:w-40" />
           </div>
 
           <h1 className="font-display">
             {/* CRÉATIF fixe */}
             <span
               ref={firstLineRef}
-              className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-[0.08em] leading-none select-none"
+              className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[0.02em] leading-none select-none text-foreground"
               style={{ perspective: 1000 }}
             >
               DÉVELOPPEUR
@@ -189,43 +223,68 @@ export default function Hero() {
             >
               <span
                 ref={typewriterRef}
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal tracking-[0.08em] leading-none"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[0.02em] leading-none text-accent"
                 style={{ perspective: 1000 }}
               />
               <span
                 ref={cursorRef}
-                className="inline-block w-1.5 h-12 sm:h-14 md:h-16 lg:h-20 bg-white ml-3 opacity-100"
+                className="inline-block w-1.5 h-12 sm:h-14 md:h-16 lg:h-20 bg-accent ml-3 opacity-100"
               />
             </span>
           </h1>
 
           <p
             ref={subtitleRef}
-            className="mt-10 md:mt-14 text-base sm:text-lg md:text-xl lg:text-2xl text-gray-400 font-light tracking-wide max-w-3xl mx-auto xl:mx-0"
+            className="mt-10 md:mt-14 text-base sm:text-lg md:text-xl lg:text-2xl text-foreground/55 font-normal tracking-wide max-w-3xl mx-auto xl:mx-0"
           >
             Je transforme des idées en applications fonctionnelles, élégantes et performantes.
           </p>
         </div>
 
-        {/* Photo : colonne dédiée, ne recouvre jamais le texte */}
+        {/* Photo : plaque à coins, ne recouvre jamais le texte */}
         <div
           ref={photoRef}
-          className="relative hidden h-[480px] w-[200px] shrink-0 xl:block xl:h-[600px] xl:w-[240px]"
-          style={{
-            maskImage:
-              "radial-gradient(ellipse 65% 55% at 50% 42%, black 25%, transparent 100%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 65% 55% at 50% 42%, black 25%, transparent 100%)",
-          }}
+          className="relative hidden shrink-0 xl:block"
+          style={{ perspective: 1200 }}
         >
-          <Image
-            src={withBasePath("/hakim-full-tight.jpg")}
-            alt="Hakim Sabi"
-            fill
-            priority
-            className="object-contain object-bottom"
-            sizes="240px"
-          />
+          <div
+            ref={photoPlateRef}
+            className="relative h-[480px] w-[260px] overflow-hidden rounded-sm border border-foreground/10 bg-surface-dark-raised p-2 xl:h-[600px] xl:w-[300px]"
+            style={{ transformStyle: "preserve-3d" }}
+          >
+            <div className="relative h-full w-full overflow-hidden">
+              <Image
+                src={withBasePath("/hakim-full-tight.jpg")}
+                alt="Hakim Sabi"
+                fill
+                priority
+                className="object-cover object-top"
+                sizes="300px"
+              />
+            </div>
+
+            {/* Coins (bracket panel) */}
+            {[
+              "left-2 top-2",
+              "right-2 top-2 -scale-x-100",
+              "left-2 bottom-2 -scale-y-100",
+              "right-2 bottom-2 -scale-x-100 -scale-y-100",
+            ].map((pos) => (
+              <svg
+                key={pos}
+                viewBox="0 0 10.5 10.5"
+                className={`pointer-events-none absolute h-3.5 w-3.5 text-accent ${pos}`}
+                aria-hidden="true"
+              >
+                <path
+                  d="M0 0.5H10V10.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                />
+              </svg>
+            ))}
+          </div>
         </div>
       </div>
     </section>

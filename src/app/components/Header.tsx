@@ -37,13 +37,13 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-6 md:py-8 bg-black/80 backdrop-blur-md">
+      <header className="fixed top-0 left-0 right-0 z-50 px-6 md:px-10 py-6 md:py-8 bg-background/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex flex-col leading-tight">
-            <p className="font-display text-xl md:text-2xl lg:text-3xl font-normal tracking-[0.12em] text-white">
+            <p className="font-display text-xl md:text-2xl lg:text-3xl font-bold tracking-[0.06em] text-foreground">
               RAKOTOALIMANANA
             </p>
-            <p className="text-sm md:text-base lg:text-lg text-gray-300 -mt-1">
+            <p className="text-sm md:text-base lg:text-lg text-foreground/60 -mt-1">
               Ny Harijaona Hakim Sabi
             </p>
           </div>
@@ -55,9 +55,9 @@ export default function Header() {
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
           >
-            <span className={`block absolute h-0.5 w-8 bg-white transform transition-all duration-300 ${isOpen ? "rotate-45 translate-y-0" : "-translate-y-2"}`} />
-            <span className={`block absolute h-0.5 w-8 bg-white transition-all duration-300 ${isOpen ? "opacity-0" : "opacity-100"}`} />
-            <span className={`block absolute h-0.5 w-8 bg-white transform transition-all duration-300 ${isOpen ? "-rotate-45 translate-y-0" : "translate-y-2"}`} />
+            <span className={`block absolute h-0.5 w-8 bg-foreground transform transition-all duration-300 ${isOpen ? "rotate-45 translate-y-0" : "-translate-y-2"}`} />
+            <span className={`block absolute h-0.5 w-8 bg-foreground transition-all duration-300 ${isOpen ? "opacity-0" : "opacity-100"}`} />
+            <span className={`block absolute h-0.5 w-8 bg-foreground transform transition-all duration-300 ${isOpen ? "-rotate-45 translate-y-0" : "translate-y-2"}`} />
           </button>
 
           <nav aria-label="Navigation principale" className="hidden md:flex gap-12 lg:gap-16 text-lg">
@@ -65,10 +65,10 @@ export default function Header() {
               <button
                 key={s.id}
                 onClick={() => scrollTo(`#${s.id}`)}
-                className="group relative py-1 text-white/80 transition-colors duration-300 hover:text-white"
+                className="group relative py-1 uppercase text-foreground/80 transition-colors duration-300 hover:text-foreground"
               >
                 {s.name}
-                <span className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-purple-400 transition-transform duration-300 ease-out group-hover:scale-x-100" />
+                <span className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-300 ease-out group-hover:scale-x-100" />
               </button>
             ))}
           </nav>
@@ -82,14 +82,14 @@ export default function Header() {
         initial={{ x: "100%" }}
         animate={{ x: isOpen ? 0 : "100%" }}
         transition={{ type: "tween", duration: 0.5, ease: "easeInOut" }}
-        className="fixed inset-0 z-40 bg-black flex items-center justify-center"
+        className="fixed inset-0 z-40 bg-background flex items-center justify-center"
       >
-        <div className="flex flex-col gap-12 text-7xl font-light tracking-tight text-center">
+        <div className="flex flex-col gap-12 text-7xl font-light uppercase tracking-tight text-center">
           {sections.map((s) => (
             <button
               key={s.id}
               onClick={() => scrollTo(`#${s.id}`)}
-              className="text-white hover:text-purple-400 transition-colors duration-500"
+              className="text-foreground hover:text-accent transition-colors duration-500"
             >
               {s.name}
             </button>
