@@ -150,7 +150,7 @@ export default function About() {
     <section
       id="apropos"
       ref={containerRef}
-      className="relative min-h-screen bg-surface-dark text-white pt-20 pb-32 md:pt-24 overflow-hidden"
+      className="relative min-h-screen bg-surface-dark text-white pt-28 pb-32 md:pt-36 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-8">
         <div className="mb-4 flex items-center gap-4 md:mb-6">

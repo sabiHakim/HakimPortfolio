@@ -26,13 +26,6 @@ const projects: ProjectType[] = [
     liveUrl: "https://times261.com",
   },
   {
-    id: 2,
-    title: "Rental System",
-    tech: "Next.js · SpringBoot · Java",
-    image: "/ordi.jfif",
-    liveUrl: "https://rental.mg-transp.com",
-  },
-  {
     id: 3,
     title: "C.A.R Platform",
     tech: "Next.js · TypeScript · Tailwind",
@@ -71,6 +64,13 @@ const projects: ProjectType[] = [
     tech: "React · SpringBoot",
     image: "/ordi.jfif",
     liveUrl: "https://vanga.mg",
+  },
+  {
+    id: 10,
+    title: "Intimement Nous",
+    tech: "Flutter · Dart · Firebase",
+    image: "/ordi.jfif",
+    liveUrl: "https://intimement-toi.com",
   },
 ];
 
@@ -114,9 +114,16 @@ export default function Projects() {
     const setX = gsap.quickTo(preview, "x", { duration: 0.5, ease: "power3.out" });
     const setY = gsap.quickTo(preview, "y", { duration: 0.5, ease: "power3.out" });
 
+    // La boîte (w-80 h-56) est centrée sur le curseur : on la maintient
+    // dans la fenêtre pour qu'elle ne provoque jamais de débordement horizontal.
+    const halfW = 160;
+    const halfH = 112;
+
     const onMove = (e: PointerEvent) => {
-      setX(e.clientX);
-      setY(e.clientY);
+      const x = Math.min(Math.max(e.clientX, halfW), window.innerWidth - halfW);
+      const y = Math.min(Math.max(e.clientY, halfH), window.innerHeight - halfH);
+      setX(x);
+      setY(y);
     };
 
     window.addEventListener("pointermove", onMove);
@@ -140,7 +147,7 @@ export default function Projects() {
     <section
       ref={sectionRef}
       id="projets"
-      className="relative bg-surface-dark px-6 py-20 text-white md:px-8 md:py-28"
+      className="relative bg-surface-dark px-6 pt-28 pb-20 text-white md:px-8 md:pt-36 md:pb-28"
     >
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex items-center justify-center gap-4 md:mb-16">

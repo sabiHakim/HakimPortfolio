@@ -15,12 +15,14 @@ export default function FluidButton({
   children,
   className = "",
   circleClassName = "bg-accent",
+  wrapperClassName = "inline-block",
   ...props
 }: {
   as?: "button" | "a";
   children: React.ReactNode;
   className?: string;
   circleClassName?: string;
+  wrapperClassName?: string;
 } & React.ComponentPropsWithoutRef<"button"> &
   React.ComponentPropsWithoutRef<"a">) {
   const circleRef = useRef<HTMLSpanElement>(null);
@@ -30,8 +32,11 @@ export default function FluidButton({
     if (!tlRef.current && circleRef.current) {
       tlRef.current = gsap
         .timeline({ paused: true })
-        .fromTo(circleRef.current, { yPercent: 125 }, { yPercent: 25, duration: 0.4, ease: "power3.in" })
-        .to(circleRef.current, { yPercent: 0, duration: 0.25 });
+        .fromTo(
+          circleRef.current,
+          { scaleY: 0 },
+          { scaleY: 1, duration: 0.55, ease: "power2.out" }
+        );
     }
     return tlRef.current;
   };
@@ -42,7 +47,7 @@ export default function FluidButton({
   const Comp = Tag as "button";
 
   return (
-    <MagneticButton>
+    <MagneticButton className={wrapperClassName}>
       <Comp
         onPointerEnter={onEnter}
         onPointerLeave={onLeave}
@@ -52,7 +57,8 @@ export default function FluidButton({
         <span
           ref={circleRef}
           aria-hidden
-          className={`pointer-events-none absolute inset-0 translate-y-full rounded-[inherit] ${circleClassName}`}
+          style={{ transform: "scaleY(0)", transformOrigin: "bottom" }}
+          className={`pointer-events-none absolute inset-0 rounded-[inherit] ${circleClassName}`}
         />
         <span className="relative z-10 inline-flex items-center justify-center gap-3">
           {children}

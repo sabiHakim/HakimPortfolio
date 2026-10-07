@@ -121,25 +121,13 @@ export default function Hero() {
         ease: "steps(1)",
       });
 
-      // Parallax subtitle
-      gsap.to(subtitleRef.current, {
-        y: -120,
-        ease: "none",
-        scrollTrigger: { trigger: subtitleRef.current, scrub: 1 },
-      });
-
-      // Photo : fondu + léger parallax
+      // Photo : fondu
       tl.fromTo(
         photoRef.current,
         { opacity: 0, y: 40 },
         { opacity: 1, y: 0, duration: 1.6, ease: "power3.out" },
         "-=1.2"
       );
-      gsap.to(photoRef.current, {
-        y: -60,
-        ease: "none",
-        scrollTrigger: { trigger: photoRef.current, scrub: 1 },
-      });
     });
 
     return () => {

@@ -69,6 +69,12 @@ body {
   color: #000;
 }
 
+html {
+  /* Les éléments position:fixed (curseur, aperçu flottant) ignorent l'overflow
+     du body — il faut le poser ici pour empêcher tout débordement horizontal. */
+  overflow-x: hidden;
+}
+
 body {
   font-family: var(--font-sans), sans-serif;
   text-rendering: optimizeLegibility;

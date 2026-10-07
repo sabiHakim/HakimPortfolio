@@ -25,8 +25,8 @@ export default function MagneticButton({
     const el = ref.current;
     if (!el) return;
 
-    const setX = gsap.quickTo(el, "x", { duration: 0.6, ease: "elastic.out(1, 0.3)" });
-    const setY = gsap.quickTo(el, "y", { duration: 0.6, ease: "elastic.out(1, 0.3)" });
+    const setX = gsap.quickTo(el, "x", { duration: 0.4, ease: "power3.out" });
+    const setY = gsap.quickTo(el, "y", { duration: 0.4, ease: "power3.out" });
 
     const onMove = (e: PointerEvent) => {
       const rect = el.getBoundingClientRect();
@@ -36,9 +36,10 @@ export default function MagneticButton({
       setY(relY * strength);
     };
 
+    // Un léger rebond au retour au repos (seulement à la sortie, pas pendant
+    // le suivi) pour une sensation douce plutôt que saccadée.
     const onLeave = () => {
-      setX(0);
-      setY(0);
+      gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.5)" });
     };
 
     el.addEventListener("pointermove", onMove);
