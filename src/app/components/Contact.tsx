@@ -130,7 +130,7 @@ export default function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative overflow-hidden bg-background px-6 py-24 text-foreground md:px-8 md:py-32"
+      className="relative overflow-hidden bg-background px-6 pt-28 pb-24 text-foreground md:px-8 md:pt-36 md:pb-32"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(2,210,227,0.10),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(9,10,11,0.04),transparent_30%)]" />
 
@@ -168,11 +168,12 @@ export default function Contact() {
             </div>
           </div>
 
-          <div ref={socialsRef} className="flex flex-wrap gap-3 pt-2">
+          <div ref={socialsRef} className="flex flex-wrap items-center gap-3 pt-2">
             <FluidButton
               as="a"
               href={withBasePath("/cv_Hakim.pdf")}
               download
+              wrapperClassName="inline-block"
               circleClassName="bg-accent"
               className="rounded-full border border-foreground/20 bg-transparent px-5 py-3 text-sm font-semibold text-foreground transition-colors duration-300"
             >
@@ -243,6 +244,7 @@ export default function Contact() {
                 type="submit"
                 disabled={status === "sending"}
                 circleClassName="bg-foreground"
+                wrapperClassName="w-full sm:w-auto"
                 className="w-full rounded-full bg-accent px-6 py-4 text-sm font-semibold text-black shadow-lg shadow-accent/20 transition-shadow duration-300 hover:shadow-accent/30 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
               >
                 <span className="transition-colors duration-300 group-hover:text-background">

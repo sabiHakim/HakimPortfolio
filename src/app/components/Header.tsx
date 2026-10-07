@@ -86,13 +86,13 @@ export default function Header() {
         transition={{ type: "tween", duration: 0.5, ease: "easeInOut" }}
         className="fixed inset-0 z-40 bg-background flex items-center justify-center"
       >
-        <div className="flex flex-col gap-12 text-7xl font-light uppercase tracking-tight text-center">
+        <div className="flex flex-col gap-12 text-7xl font-light tracking-tight text-center">
           {sections.map((s) => (
             <button
               key={s.id}
               onClick={() => scrollTo(`#${s.id}`)}
               data-cursor="hover"
-              className="text-foreground hover:text-accent transition-colors duration-500"
+              className="uppercase text-foreground hover:text-accent transition-colors duration-500"
             >
               {s.name}
             </button>
